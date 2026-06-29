@@ -1,0 +1,2 @@
+#define bank1_VERSION_MAJOR @bank1_VERSION_MAJOR@
+#define bank1_VERSION_MINOR @bank1_VERSION_MINOR@
