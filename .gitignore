@@ -1,9 +1,8 @@
-build
-.cproject
 .project
 bankexec
-.clangd
 .settings
+.cproject
+.clangd
 
 # Prerequisites
 *.d
