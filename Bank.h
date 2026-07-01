@@ -9,6 +9,9 @@
 #define BANK_H_
 #include <string>
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <stdexcept>
 #include "BankAccount.h"
 
 class Bank {
@@ -18,6 +21,7 @@ private:
 public:
 	Bank();
 	Bank(std::string bn);
+	void initialize(std::string filename);
 	~Bank();
 
 	std::string getName();

@@ -4,6 +4,8 @@ bankexec
 .cproject
 .clangd
 
+data
+
 # Prerequisites
 *.d
 
