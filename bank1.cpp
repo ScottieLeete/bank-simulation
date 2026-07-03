@@ -122,7 +122,7 @@ int main(int argc, char **argv) {
 					lastName + "|" + other_response + "|" +
 					"0|0";
 		}
-//		further code goes here
+//		further code goes here, past here you should be in an account until you log out
 
 /*
  * LAST TIME: We pushed this to github. And also got
@@ -133,6 +133,10 @@ int main(int argc, char **argv) {
  * Bank from a file.
  * Use the terminal to verify that this is working,
  * because eclipse doesn't do so well.
+ *
+ * FUTURE: Extend scope to more banks with more datasets.
+ *
+ * And put a cancel option at the first step
  */
 
 	return 0;
