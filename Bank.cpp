@@ -46,6 +46,7 @@ void Bank::initialize(std::string filename) {
         std::cerr << "General Error: " << e.what() << "\n";
     }
     // End of AI-generated code.
+
 }
 
 Bank::~Bank() {
