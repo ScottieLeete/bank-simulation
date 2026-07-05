@@ -9,6 +9,6 @@
 #define CONFIG_H_
 
 #define project9_VERSION_MAJOR 1
-#define project9_VERSION_MINOR 0.0
+#define project9_VERSION_MINOR 1.0
 
 #endif /* CONFIG_H_ */

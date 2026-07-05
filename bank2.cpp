@@ -17,7 +17,7 @@
 #include "Bank.h"
 #include "BankAccount.h"
 
-bool testForCorrectUserAndPass(std::string u, std::string p) {
+bool testForCorrectUserAndPass(std::string filename, std::string u, std::string p) {
 	/*
 	 * Look through the file to test if the username and password are right.
 	 * If user does not exist, return false.
@@ -25,10 +25,19 @@ bool testForCorrectUserAndPass(std::string u, std::string p) {
 	 * If user and password are correctly provided, return true.
 	 * For now, this has boilerplate implementation, only returning true if username and password are equal strings.
 	 */
+	std::ifstream file(filename);
+	if (!file.is_open()) {
+		std::cerr << "File error: \n" << std::endl;
+		std::cerr << "The file likely does not exist or cannot be accessed." << std::endl;
+		return false; // user cannot exist if the file also does not exist
+	}
+
+
+
 	return u == p;
 }
 
-bool testIfUserExists(std::string u) {
+bool testIfUserExists(std::string filename, std::string u) {
 	/*
 	 * Look through the file to test if the username
 	 * already exists.
@@ -108,7 +117,7 @@ BankAccount logIntoAccount (std::string bankfilename) {
 	std::cin >> username;
 	std::cout << "Please provide the password: " << std::endl;
 	std::cin >> password;
-	if (not testForCorrectUserAndPass(username, password)) {
+	if (not testForCorrectUserAndPass(bankfilename, username, password)) {
 		std::cout << "Invalid username or password." << std::endl;
 		}
 	}
@@ -141,8 +150,8 @@ BankAccount createAccount (std::string bankfilename) {
 	std::string newAccId = std::to_string(getNumLinesInData("./data/dv.bank"));
 
 	std::string primaryData = newAccId + "|" +
-			response + "|" + firstName + "|" +
-			lastName + "|" + other_response + "|" +
+			username + "|" + firstname + "|" +
+			lastname + "|" + password + "|" +
 			"0|0";
 }
 
