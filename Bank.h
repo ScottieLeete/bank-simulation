@@ -15,13 +15,13 @@
 #include "BankAccount.h"
 
 class Bank {
-private:
+protected:
 	std::string bankName;
 	std::vector<BankAccount> listOfAccs;
 public:
 	Bank();
 	Bank(std::string bn);
-	void initialize(std::string filename);
+	void initialize();
 	~Bank();
 
 	std::string getName();
