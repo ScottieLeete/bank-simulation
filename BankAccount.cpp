@@ -29,35 +29,13 @@ BankAccount::BankAccount(std::string data)
 	 */
 	std::stringstream ss(data);
 
-//	std::string piece;
-
-//	This first value is an integer and needs std::stoi (pretty simple)
-//	getline(ss, piece, '|');
-//	this->id = std::stoi(piece);
-
-//	The next four values are strings and do not need conversion
-//	getline(ss, piece, '|');
-//	this->username = piece;
-//	getline(ss, piece, '|');
-//	this->first = piece;
-//	getline(ss, piece, '|');
-//	this->last = piece;
-//	getline(ss, piece, '|');
-//	this->password = piece;
-//
-//	The last two values are longs and need std::stol (still simple)
-//	getline(ss, piece, '|');
-//	this->checkingBal = std::stol(piece);
-//	getline(ss, piece, '|');
-//	this->savingsBal = std::stol(piece);
-
-	// Wrap the string in a stream so we can read from it sequentially
-
 	// Intermediate string buffers to hold raw text pieces
+	// C++ threw a hissy fit when we tried to declare these types for what they were supposed to be
 	std::string raw_id; // id is already a short variable name, so I came up with this
 	std::string usnm, fn, ln, pswd;
 	std::string cbal, sbal;
 
+	// Most of the following code in this function is AI-generated, prominently the errors.
 	// 1. Extract each piece using '|' as the delimiter
 	if (std::getline(ss, raw_id, '|') &&
 		std::getline(ss, usnm, '|') &&
@@ -95,7 +73,24 @@ BankAccount::BankAccount(std::string data)
 }
 
 bool BankAccount::checkPassword(std::string attempt) {
+	/*
+	 * Securely checks if password matches the attempt.
+	 * Returns true if it does, false if it does not.
+	 */
 	return password == attempt;
+}
+
+std::string BankAccount::compactData() {
+	/*
+	 * Method to create a string that can be written back into a data file.
+	 * Intended for use after the data inside a BankAccount instance has changed and
+	 * it's time to put it back.
+	 * Returns the compacted data string.
+	 */
+	return std::to_string(this->id) + "|" + this->username + "|"
+			+ this->first + "|" + this->last + "|"
+			+ this->password + "|" + std::to_string(this->checkingBal)
+			+ "|" + std::to_string(this->savingsBal);
 }
 
 BankAccount::~BankAccount() {
