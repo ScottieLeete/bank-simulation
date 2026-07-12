@@ -1,3 +1,11 @@
+/*
+ * bank1.cpp
+ *
+ *  Created on: Jul 12, 2026
+ *      Author: scott
+ *  Created to replace the previous bank1.cpp (now stored as "oldmain.cpp")
+ */
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,78 +20,30 @@ namespace bhf {
 	#include "bankhelperfuncs.h"
 }
 
-/*
- * The main file of this project, has the main(___) function.
- */
-
 int main(int argc, char **argv) {
-	std::string myBankName = "Darth Vader's Bank";
-	Bank banksy = Bank(myBankName);
-	std::string response;
-	std::string other_response;
-	std::cout << "Welcome to " << myBankName << std::endl;
+	FileBank b = getBank(); // we should write this in bankhelperfuncs
 
-	// Potential While-loop of user interaction begins here
+	useBank(b); // we're fine writing this here
+	// this will have the WHOLE loop inside of it
 
-	while (response != "login" && response != "create") {
-		std::cout << "Would you like to log in (\"login\") to an account or create one now (\"create\")?" << std::endl;
-		std::cin >> response;
-	}
-	while (response == "login") {
-		std::cout << "Please provide the username: " << std::endl;
-		std::cin >> response;
-		std::cout << "Please provide the password: " << std::endl;
-		std::cin >> other_response;
-		if (not testForCorrectUserAndPass(response, other_response)) {
-			std::cout << "Invalid username or password." << std::endl;
-		}
-	}
-	while (response == "create") {
-			std::cout << "Please come up with a username: " << std::endl;
-			std::cin >> response;
-			if (response == "cancel") {
-				break;
-			}
-			if (testIfUserExists(response)) {
-				std::cout << "An account with this username already exists, please try again." << std::endl;
-				std::cout << "Alternatively, type 'cancel' at the username prompt to cancel account creation." << std::endl;
-				continue;
-			}
-			std::cout << "Please come up with a secure password: " << std::endl;
-			std::cin >> other_response;
-			std::string firstName;
-			std::cout << "Please type your first name: " << std::endl;
-			std::cin >> firstName;
-			std::string lastName;
-			std::cout << "Please type your first name: " << std::endl;
-			std::cin >> lastName;
-			if (firstName.empty() or lastName.empty() or other_response.empty() or response.empty()) {
-				std::cout << "At least one parameter is empty. Please try again." << std::endl;
-				continue;
-			}
-			std::string newAccId = std::to_string(getNumLinesInData("./data/dv.bank"));
+	saveBank(b); // realistically, after account creation/login, we are just changing
+	// one account each time. but still we should write this in bankhelperfuncs
 
-			std::string primaryData = newAccId + "|" +
-					response + "|" + firstName + "|" +
-					lastName + "|" + other_response + "|" +
-					"0|0";
-		}
-//		further code goes here, past here you should be in an account until you log out
-
-/*
- * LAST TIME: We pushed this to github. And also got
- * started on data holding and processing. w3schools
- * and AI are kind of carrying us right now.
- *
- * THIS TIME: [continue to] Figure out how to read in a
- * Bank from a file.
- * Use the terminal to verify that this is working,
- * because eclipse doesn't do so well.
- *
- * FUTURE: Extend scope to more banks with more datasets.
- *
- * And put a cancel option at the first step
- */
-
-	return 0;
+	// continue this loop until it's time to leave
 }
+
+void useBank(Bank b) {
+	std::string response;
+	BankAccount* ba = getAccount(); // write this in BHF; try login, create,
+	// but if we get exit anywhere here, the loop is over
+	// also this has to be a pointer for the sake of testing if it's null
+
+	while (ba = getAccount()) { // assignment operand (=) returns value that was assigned. we have anti-null insurance here
+		performAccountActions(ba); // dont account for exit until we leave this loop
+
+	}
+	// test if BankAccount ba is null, if not, then go to this loop.
+	// else, try again until we get a proper BankAccount ba that isn't null
+}
+
+

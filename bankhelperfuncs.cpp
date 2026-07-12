@@ -74,19 +74,16 @@ namespace bhf {
 		return line_count;
 	}
 
-	BankAccount createBankAccInstance(std::string rawdataline) {
+	std::string getIntroCommand(Bank b) {
 		/*
-		 * Create a new instance of a BankAccount using
-		 * a line of data, passed in as "rawdataline".
-		 * Format is: id|username|first name|last name|password|checking balance|savings balance
-		 * (yes, the pipes are necessary)
-		 * Return that new instance.
+		 * The whole program will be a loop of login/create account, then
+		 * use that account that was just accessed/made, then
+		 * sign out of that account, then
+		 * continue the loop or leave the bank.
+		 *
+		 * This is the first part of that loop
+		 * Return the command that comes next
 		 */
-		BankAccount temp = BankAccount(0, "un", "first", "last", "pswd", long(0), long(0));
-		return temp;
-	}
-
-	BankAccount bankloop(std::string bankfilename) {
 		std::string myBankName = "Darth Vader's Bank";
 		std::cout << "Welcome to " << myBankName << std::endl;
 
@@ -95,14 +92,16 @@ namespace bhf {
 			std::cout << "Please choose action: (\'login\') to an account, (\'create\') account, or (\'leave\')" << std::endl;
 			std::cin >> userCommand;
 			if (userCommand == "leave" || userCommand == "exit" || userCommand == "quit" || userCommand == "stop") {
-				return nullptr;
+				return "exit";
 			}
 			else if (userCommand == "login" || userCommand == "log in" || userCommand == "sign in" || userCommand == "log on") {
-				BankAccount ba = logIntoAccount(bankfilename);
+//				BankAccount ba = logIntoAccount(bankfilename);
+				return "login"
 				// return function value of logIntoAccount after that function finishes
 			}
 			else if (userCommand == "create" || userCommand == "make" || userCommand == "new" || userCommand == "register") {
-				BankAccount ba = createAccount(bankfilename);
+//				BankAccount ba = createAccount(bankfilename);
+				return "create"
 				// return function value of createAccount after that fnction finishes
 			}
 			else {
@@ -111,6 +110,17 @@ namespace bhf {
 		}
 	}
 
+	/**
+	 * The whole program will be a loop of login/create account, then
+	 * use that account that was just accessed/made, then
+	 * sign out of that account, then
+	 * continue the loop or leave the bank.
+	 *
+	 * This is the login part of the loop, alternative to creation.
+	 * IDK what im going to return for this help me
+	 * But I will need to account for the possibility of backing out
+	 * of a login.
+	 */
 	BankAccount logIntoAccount (std::string bankfilename) {
 		std::string username, password;
 		std::cout << "Please provide the username: " << std::endl;
@@ -122,6 +132,17 @@ namespace bhf {
 		}
 		throw std::runtime_error("No implementation");
 	}
+
+	/**
+	 * The whole program will be a loop of login/create account, then
+	 * use that account that was just accessed/made, then
+	 * sign out of that account, then
+	 * continue the loop or leave the bank.
+	 *
+	 * This is the creation part of the loop, alternative to login.
+	 * I will need to account for the possibility of backing out of
+	 * creation.
+	 */
 
 	BankAccount createAccount (std::string bankfilename) {
 		std::string username, password, firstname, lastname;
