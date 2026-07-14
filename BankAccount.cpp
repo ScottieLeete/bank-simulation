@@ -10,6 +10,19 @@
 #include <iostream>
 #include "BankAccount.h"
 
+BankAccount::BankAccount()
+// generic default constructor.
+// do not use this in actual implementation
+{
+	this->id = 9999;
+	this->username = "AnonymousUser";
+	this->first = "John";
+	this->last = "Doe";
+	this->password = "password";
+	this->checkingBal = 300;
+	this->savingsBal = 500;
+}
+
 BankAccount::BankAccount(int i, std::string un, std::string f, std::string l, std::string pswd, long checking, long savings)
 {
 	this->id = i;

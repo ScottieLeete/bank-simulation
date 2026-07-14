@@ -14,7 +14,7 @@
 #include <fstream>
 #include <stdexcept>
 
-FileBank::FileBank(std::string& bn, std::string& dfn) : Bank(bn) {
+FileBank::FileBank(std::string bankName, std::string dataFileName) : Bank(bn) {
 	/*
 	 * Unlike a regular Bank, there will only exist a two-parameter
 	 * constructor for this class because filename is basically
@@ -22,7 +22,7 @@ FileBank::FileBank(std::string& bn, std::string& dfn) : Bank(bn) {
 	 * Bank Name comes first because it was part of the original
 	 * class, file name comes second.
 	 */
-	this->dataFileName = dfn;
+	this->dataFileName = dataFileName;
 }
 
 void FileBank::initialize() {

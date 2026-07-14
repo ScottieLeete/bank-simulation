@@ -16,7 +16,7 @@ namespace bhf {
  * The main file of this project, has the main(___) function.
  */
 
-int main(int argc, char **argv) {
+int moin(int argc, char **argv) {
 	std::string myBankName = "Darth Vader's Bank";
 	Bank banksy = Bank(myBankName);
 	std::string response;

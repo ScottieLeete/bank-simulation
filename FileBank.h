@@ -20,7 +20,8 @@ class FileBank: public Bank {
 protected:
 	std::string dataFileName;
 public:
-	FileBank(std::string filename);
+
+	FileBank(std::string bankName, std::string dataFileName);
 //	void initialize();
 	virtual ~FileBank();
 };
