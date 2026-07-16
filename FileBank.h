@@ -22,7 +22,7 @@ protected:
 public:
 
 	FileBank(std::string bankName, std::string dataFileName);
-//	void initialize();
+	void initialize();
 	virtual ~FileBank();
 };
 

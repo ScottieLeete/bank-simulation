@@ -17,11 +17,12 @@
 #include "config.h"
 #include "FileBank.h"
 #include "Bank.h"
+#include "bank1.h"
 #include "BankAccount.h"
 
-namespace bhf {
-	#include "bankhelperfuncs.h"
-}
+//namespace bhf {
+//	#include "bankhelperfuncs.h"
+//}
 
 std::optional<BankAccount> getAccount(Bank &b) {
 	/*
@@ -61,12 +62,14 @@ std::optional<BankAccount> getAccount(Bank &b) {
 	return std::nullopt;
 }
 
-void performAccountActions(BankAccount &ba) { // we want to modify the actual value passed
-	std::cout << "Now performing account actions" << std::endl;
-	return;
-}
+
 
 std::optional<BankAccount> loginAttempt(Bank &b) {
+	/*
+	 * Try to log into an account.
+	 * If you succeed, return that account.
+	 * If you fail, return nullopt. (to signal you cancelled the action)
+	 */
 	std::string un, pw;
 	std::cout << "Please enter username or type (\"exit\") to leave: " << std::endl;
 	std::cin >> un;
@@ -82,6 +85,12 @@ std::optional<BankAccount> loginAttempt(Bank &b) {
 }
 
 std::optional<BankAccount> accCreationAttempt(Bank &b) {
+	/*
+	 * Try to create a new BankAccount.
+	 * If you succeed, return that account, and probably write its existence
+	 * into the corresponding Bank.
+	 * If you fail, return nullopt. (to signal you cancelled the action)
+	 */
 	std::string un, fn, ln, pw;
 	std::cout << "Please come up with a username or type (\"exit\") to leave: " << std::endl;
 	std::cin >> un;
@@ -91,11 +100,32 @@ std::optional<BankAccount> accCreationAttempt(Bank &b) {
 	return std::nullopt;
 }
 
-void performAccountFunctions(Bank &b, BankAccount &ba) {
+void performAccountActions(BankAccount &ba) { // we want to modify the actual value passed
+	/*
+	 * Perform actions such as adding and removing money to the checking and savings
+	 * balances that are associated with one BankAccount instance.
+	 * Then, we will write the new BankAccount data back (somehow, either
+	 * inside or outside of this function), with hopefully no need
+	 * to return anything else.
+	 */
+	std::cout << "Now performing account actions" << std::endl;
+	return;
+}
+
+void performAccountActions(Bank &b, BankAccount &ba) {
+	/*
+	 * We already have this function up above, just
+	 * without the Bank &b parameter.
+	 * Neither this nor that are implemented yet.
+	 */
 	return;
 }
 
 Bank getBank() {
+	/*
+	 * Now all we need is just one bank. Oh look, there's one!
+	 * (Instances and returns a manually-set bank)
+	 */
 	std::string name = "Darth Vader's Bank";
 	std::string dataFile = "./data/dv.bank";
 	FileBank fb = FileBank(name, dataFile);
@@ -103,6 +133,10 @@ Bank getBank() {
 }
 
 void useBank(Bank &b) {
+	/*
+	 * The overall loop of using a bank, that will go into other functions to change
+	 * phases of usage. (Lobby, Login/Creation, Usage; and finally exiting which ends the loop)
+	 */
 	std::string response;
 //	BankAccount* ba = getAccount(); // write this in BHF; try login, create,
 	// but if we get exit anywhere here, the loop is over
@@ -120,11 +154,19 @@ void useBank(Bank &b) {
 }
 
 void saveBank(Bank &b) {
+	/*
+	 * Probably will not be used, but this method was created
+	 * with the intention of saving data that belongs to a bank
+	 * by passing in that bank. No return is needed.
+	 */
 	return;
 }
 
 int main(int argc, char **argv) {
-	FileBank b = getBank(); // we should write this in bankhelperfuncs
+	/*
+	 * The main method. It comes last in implementation.
+	 */
+	Bank b = getBank(); // we should write this in bankhelperfuncs
 
 	useBank(b); // we're fine writing this here
 	// this will have the WHOLE loop inside of it

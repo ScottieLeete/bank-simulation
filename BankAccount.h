@@ -87,7 +87,7 @@ public:
 	void setUsername(std::string username) {
 		this->username = username;
 	}
-
+	std::string compactData();
 
 };
 
