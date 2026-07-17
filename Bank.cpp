@@ -37,5 +37,18 @@ std::string Bank::getName()
 	return this->bankName;
 }
 
+bool Bank::userExists(std::string username) {
+	/*
+	 * Check if the specified username exists in any account stored in the bank.
+	 * Return true if it does, false if it does not.
+	 */
+    for (const ba& acc : this->listOfAccs) {
+        if (ba.getUsername() == username) {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 

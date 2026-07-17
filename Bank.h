@@ -23,7 +23,7 @@ public:
 	Bank(std::string bn);
 	void initialize();
 	~Bank();
-
+	bool usernameExists(std::string un);
 	std::string getName();
 };
 

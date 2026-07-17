@@ -97,7 +97,17 @@ std::optional<BankAccount> accCreationAttempt(Bank &b) {
 	if (un == "exit") {
 		return std::nullopt;
 	}
+
+	std::cout << "Please enter your first name: " << std::endl;
+	std::cin >> fn;
+	std::cout << "Please enter your last name: " << std::endl;
+	std::cin >> ln;
+	std::cout << "Please come up with a password: " << std::endl;
+	std::cin >> pw;
 	return std::nullopt;
+	if (b.usernameExists(un)) {
+		std::cout << "This username is already taken." << std::endl;
+	}
 }
 
 void performAccountActions(BankAccount &ba) { // we want to modify the actual value passed
