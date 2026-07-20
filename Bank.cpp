@@ -8,6 +8,7 @@
 #include "Bank.h"
 #include "BankAccount.h"
 #include <vector>
+#include <optional>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -37,18 +38,32 @@ std::string Bank::getName()
 	return this->bankName;
 }
 
-bool Bank::userExists(std::string username) {
+bool Bank::usernameExists(std::string username) {
 	/*
 	 * Check if the specified username exists in any account stored in the bank.
 	 * Return true if it does, false if it does not.
 	 */
-    for (const ba& acc : this->listOfAccs) {
-        if (ba.getUsername() == username) {
+    for (const BankAccount& acc : this->listOfAccs) {
+        if (acc.getUsername() == username) {
             return true;
         }
     }
     return false;
 }
 
-
-
+std::optional<BankAccount> Bank::attemptLogin(std::string un, std::string pw) {
+	//TODO delete all printing lines
+	for (const BankAccount& acc : this->listOfAccs) {
+	        if (acc.getUsername() == un) {
+	            if (acc.checkPassword(pw)) {
+	            	return acc;
+	            } else {
+	            	return std::nullopt;
+	            	// No harm in saving processing after
+	            	// the ONE account we are looking for gives us
+	            	// notice that the password was wrong.
+	            }
+	        }
+	    }
+	return std::nullopt;
+}

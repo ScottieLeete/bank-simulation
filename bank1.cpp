@@ -80,8 +80,14 @@ std::optional<BankAccount> loginAttempt(Bank &b) {
 	// but we won't tell the user if the username didn't exist
 	std::cout << "Please enter password: " << std::endl;
 	std::cin >> pw;
+	auto ba = b.attemptLogin(un, pw);
+	if (ba.has_value()) {
+		std::cout << "Welcome, " << ba.value().getFirst() << " " << ba.value().getLast() << "!" << std::endl;
+		return ba;
+	} else {
+		std::cout << "Invalid credentials" << std::endl;
+	}
 	return std::nullopt;
-
 }
 
 std::optional<BankAccount> accCreationAttempt(Bank &b) {
@@ -104,10 +110,12 @@ std::optional<BankAccount> accCreationAttempt(Bank &b) {
 	std::cin >> ln;
 	std::cout << "Please come up with a password: " << std::endl;
 	std::cin >> pw;
-	return std::nullopt;
+
 	if (b.usernameExists(un)) {
 		std::cout << "This username is already taken." << std::endl;
 	}
+
+	return std::nullopt;
 }
 
 void performAccountActions(BankAccount &ba) { // we want to modify the actual value passed
@@ -139,6 +147,7 @@ Bank getBank() {
 	std::string name = "Darth Vader's Bank";
 	std::string dataFile = "./data/dv.bank";
 	FileBank fb = FileBank(name, dataFile);
+	fb.initialize();
 	return fb;
 }
 

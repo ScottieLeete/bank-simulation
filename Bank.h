@@ -9,6 +9,7 @@
 #define BANK_H_
 #include <string>
 #include <vector>
+#include <optional>
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
@@ -25,6 +26,7 @@ public:
 	~Bank();
 	bool usernameExists(std::string un);
 	std::string getName();
+	std::optional<BankAccount> attemptLogin(std::string un, std::string pw);
 };
 
 

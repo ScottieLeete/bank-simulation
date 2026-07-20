@@ -37,14 +37,20 @@ void FileBank::initialize() {
     std::ifstream file;
 
     // 1. Tell the stream to throw exceptions when a failure occurs
-    file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+//    file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
     try {
         // 2. Attempt to open the file inside the try block
         file.open(this->dataFileName);
-
+        if (!file.is_open()) {
+        	std::cerr << "Failure to read file: " << this->dataFileName << std::endl;
+        }
         // Read file contents here...
-
+        std::string line;
+        while (std::getline(file, line)) {
+            BankAccount ba = BankAccount(line);
+            this->listOfAccs.push_back(ba);
+        }
 
         file.close();
     }

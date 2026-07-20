@@ -23,7 +23,7 @@ public:
 	BankAccount();
 	BankAccount(int i, std::string un, std::string f, std::string l, std::string pswd, long checking, long savings);
 	BankAccount(std::string data);
-	bool checkPassword(std::string attempt);
+	bool checkPassword( std::string& attempt) const;
 	virtual ~BankAccount();
 
 	// It's bad practice to implement in header files...

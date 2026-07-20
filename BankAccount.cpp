@@ -68,11 +68,6 @@ BankAccount::BankAccount(std::string data)
 			this->checkingBal = std::stol(cbal);
 			this->savingsBal = std::stol(sbal);
 
-			// 3. Output to verify the variables are correct
-			std::cout << "ID: " << this->id << "\n"
-					  << "Strings: " << this->username << ", " << this->first << ", " << this->last << ", " << this->password << "\n"
-					  << "Long 1:  " << this->checkingBal << "\n"
-					  << "Long 2:  " << this->savingsBal << "\n";
 		}
 		catch (const std::invalid_argument& e) {
 			std::cerr << "Error: One of the numeric fields contains non-numeric characters.\n";
@@ -85,7 +80,7 @@ BankAccount::BankAccount(std::string data)
 	}
 }
 
-bool BankAccount::checkPassword(std::string attempt) {
+bool BankAccount::checkPassword (std::string& attempt) const {
 	/*
 	 * Securely checks if password matches the attempt.
 	 * Returns true if it does, false if it does not.
