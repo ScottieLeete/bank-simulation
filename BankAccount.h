@@ -4,10 +4,10 @@
  *  Created on: Jun 28, 2026
  *      Author: scott
  */
+#include <string>
 
 #ifndef BANKACCOUNT_H_
 #define BANKACCOUNT_H_
-#include <string>
 
 class BankAccount {
 private:
@@ -87,7 +87,7 @@ public:
 	void setUsername(std::string username) {
 		this->username = username;
 	}
-	std::string compactData();
+	std::string compactData() const	;
 
 };
 

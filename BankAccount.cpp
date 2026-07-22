@@ -88,7 +88,7 @@ bool BankAccount::checkPassword (std::string& attempt) const {
 	return password == attempt;
 }
 
-std::string BankAccount::compactData() {
+std::string BankAccount::compactData() const {
 	/*
 	 * Method to create a string that can be written back into a data file.
 	 * Intended for use after the data inside a BankAccount instance has changed and

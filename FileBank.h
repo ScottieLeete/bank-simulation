@@ -24,6 +24,7 @@ public:
 	FileBank(std::string bankName, std::string dataFileName);
 	void initialize();
 	virtual ~FileBank();
+	void storeNewEntry(const BankAccount& ba);
 };
 
 #endif /* FILEBANK_H_ */

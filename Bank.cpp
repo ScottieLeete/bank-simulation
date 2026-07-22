@@ -67,3 +67,20 @@ std::optional<BankAccount> Bank::attemptLogin(std::string un, std::string pw) {
 	    }
 	return std::nullopt;
 }
+
+int Bank::numAccounts() const {
+	return this->listOfAccs.size();
+}
+
+void Bank::storeNewEntry(const BankAccount& ba) {
+	/*
+	 * Add a BankAccount to listOfAccs internally.
+	 * Because this is not FileBank [we wrote it there first], we're not checking a file.
+	 * Thankfully, in FileBank, this method gets overridden and improved upon.
+	 * We still check for a matching username though.
+	 */
+	if(this->usernameExists(ba.getUsername())) {
+		std::cerr << "A bank account with this user already exists here." << std::endl;;
+	}
+	this->listOfAccs.push_back(ba);
+}

@@ -114,12 +114,18 @@ std::optional<BankAccount> accCreationAttempt(Bank &b) {
 	std::cin >> ln;
 	std::cout << "Please come up with a password: " << std::endl;
 	std::cin >> pw;
-
+	std::cout << "Thanks for telling us your password dork " << std::endl;
 	if (b.usernameExists(un)) {
 		std::cout << "This username is already taken." << std::endl;
-	}
+		return std::nullopt;
+	} // technically, our implementation checks username twice, but that is probably not a bad thing
+	std::cout << "Preparing account creation" << std::endl;
+	int s = b.numAccounts() + 1; // to be ahead of the previous accounts
+	std::cout << "Registering new user #" << s << std::endl;
+	BankAccount ba = BankAccount(s, un, fn, ln, pw, 0, 0); // by default, everyone is broke
+	b.storeNewEntry(ba);
 
-	return std::nullopt;
+	return ba;
 }
 
 void performAccountActions(BankAccount &ba) { // we want to modify the actual value passed

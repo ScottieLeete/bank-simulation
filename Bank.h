@@ -27,6 +27,8 @@ public:
 	bool usernameExists(std::string un);
 	std::string getName();
 	std::optional<BankAccount> attemptLogin(std::string un, std::string pw);
+	int numAccounts() const;
+	void storeNewEntry(const BankAccount& ba);
 };
 
 
