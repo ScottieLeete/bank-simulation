@@ -40,24 +40,28 @@ std::optional<BankAccount> getAccount(Bank &b) {
 //			"exit", "leave", "quit", "stop",
 			"login", "create", "exit" // only these three are active just to keep it simple
 	};
-	while (std::find(keywords.begin(), keywords.end(), response) == keywords.end()) {
-		std::cout << "Would you like to (\"login\") to an account or (\"create\") one now?" << std::endl;
-		std::cin >> response;
-	}
-	if (response == "login") {
-		auto ba = loginAttempt(b);
-		if (ba.has_value()) {
-			// Use the same anti-null trick as we did accessing this method
-			return ba;
+	while (true) {
+		while (std::find(keywords.begin(), keywords.end(), response) == keywords.end()) {
+			std::cout << "Would you like to (\"login\") to an account or (\"create\") one now?" << std::endl;
+			std::cin >> response;
 		}
-	} else if (response == "create") {
-		if (auto ba = accCreationAttempt(b)) {
-			// Again, to insure we don't come back empty handed, or be ready for it
-			return ba;
+		if (response == "login") {
+			auto ba = loginAttempt(b);
+			if (ba.has_value()) {
+				// Use the same anti-null trick as we did accessing this method
+				return ba;
+			}
+		} else if (response == "create") {
+			auto ba = accCreationAttempt(b);
+			if (ba.has_value()) {
+				// Again, to insure we don't come back empty handed, or be ready for it
+				return ba;
+			}
+		} else if (response == "exit") {
+			// Here we come back empty handed because we're leaving
+			return std::nullopt;
 		}
-	} else if (response == "exit") {
-		// Here we come back empty handed because we're leaving
-		return std::nullopt;
+		response = "";
 	}
 	return std::nullopt;
 }
