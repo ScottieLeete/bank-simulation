@@ -16,6 +16,7 @@
 #define BANK1_H_
 
 Bank getBank();
+FileBank& getGlobalFileBank();
 void useBank(Bank &b);
 std::optional<BankAccount> getAccount(Bank &b);
 void performAccountActions(BankAccount &ba);

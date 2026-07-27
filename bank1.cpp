@@ -14,6 +14,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
+#include <typeinfo>
 #include "config.h"
 #include "FileBank.h"
 #include "Bank.h"
@@ -161,6 +162,20 @@ Bank getBank() {
 	return fb;
 }
 
+FileBank& getGlobalFileBank() {
+	/*
+	 * Because FileBank is used throughout Main, it's probably fair
+	 * to give it the honor of being 'static' (it will stick around
+	 * so long as the program is running, by virtue of us not
+	 * needing any other banks)
+	 */
+	std::string name = "Darth Vader's Empirical Bank";
+	std::string dataFile = "./data/dv.bank";
+	static FileBank fb(name, dataFile);
+	fb.initialize();
+	return fb;
+}
+
 void useBank(Bank &b) {
 	/*
 	 * The overall loop of using a bank, that will go into other functions to change
@@ -195,8 +210,9 @@ int main(int argc, char **argv) {
 	/*
 	 * The main method. It comes last in implementation.
 	 */
-	Bank b = getBank(); // we should write this in bankhelperfuncs
-
+//	Bank b = getBank(); // we should write this in bankhelperfuncs
+	Bank& b = getGlobalFileBank(); // bankhelperfuncs is gone. this is bank1.cpp
+	std::cout << "Our bank is of type " << typeid(b).name() << std::endl;
 	useBank(b); // we're fine writing this here
 	// this will have the WHOLE loop inside of it
 

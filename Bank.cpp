@@ -28,6 +28,7 @@ void Bank::initialize() {
 
 
 Bank::~Bank() {
+	std::cout << "Closing Bank" << std::endl;
 	this->listOfAccs.clear();
 	// i dont know if this is required but
 	// cleaning up this here is probably good practice
@@ -83,4 +84,5 @@ void Bank::storeNewEntry(const BankAccount& ba) {
 		std::cerr << "A bank account with this user already exists here." << std::endl;;
 	}
 	this->listOfAccs.push_back(ba);
+	std::cout << "Entry stored in Bank" << std::endl;
 }

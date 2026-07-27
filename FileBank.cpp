@@ -68,6 +68,7 @@ void FileBank::initialize() {
 }
 
 FileBank::~FileBank() {
+	std::cout << "Closing FileBank" << std::endl;
 	this->listOfAccs.clear();
 }
 
@@ -101,6 +102,7 @@ void FileBank::storeNewEntry(const BankAccount& ba) {
 
         file.close();
         listOfAccs.push_back(ba);
+        std::cout << "Entry stored in FileBank" << std::endl;
     }
     // 3. Catch the specific iostream failure
     catch (const std::ios_base::failure& e) {

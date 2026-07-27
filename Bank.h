@@ -23,12 +23,12 @@ public:
 	Bank();
 	Bank(std::string bn);
 	void initialize();
-	~Bank();
+	virtual ~Bank();
 	bool usernameExists(std::string un);
 	std::string getName();
 	std::optional<BankAccount> attemptLogin(std::string un, std::string pw);
 	int numAccounts() const;
-	void storeNewEntry(const BankAccount& ba);
+	virtual void storeNewEntry(const BankAccount& ba);
 };
 
 
