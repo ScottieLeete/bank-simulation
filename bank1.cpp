@@ -169,13 +169,18 @@ void performAccountActions(Bank &b, BankAccount &ba) {
 	 * We already have this function up above, just
 	 * without the Bank &b parameter.
 	 * Neither this nor that are implemented yet.
+	 *
+	 * IMPORTANT: By the time we finish, we should probably
+	 * update the account data before we are fully out of this function.
 	 */
 	std::string response;
 	while (true) {
 		std::cout << "Would you like to (\"deposit\") or (\"withdraw\") money? (or \"logout\"): " << std::endl;
 		std::cin >> response;
 		if (response == "logout" || response == "exit") {
-			return; // as a void method, this will let us escape anytime
+			// this was "return" until we realized
+			// we should just skip to after-loop code instead of getting out entirely
+			break;
 		}
 		else if (response == "deposit") {
 			std::cout << "Would you like to deposit to (\"checking\") or (\"savings\")?" << std::endl;
@@ -202,12 +207,13 @@ void performAccountActions(Bank &b, BankAccount &ba) {
 			}
 		}
 		else if (response == "withdraw") {
-
+			std::cout << "Too bad, withdrawal is disabled" << std::endl;
 		}
 		else {
 			std::cout << "Invalid command, please try again" << std::endl;
 		}
 	}
+	// TODO: Save to file
 	return;
 }
 
