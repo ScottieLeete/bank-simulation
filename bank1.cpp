@@ -141,12 +141,73 @@ void performAccountActions(BankAccount &ba) { // we want to modify the actual va
 	return;
 }
 
+long getAmountToChange(std::string prompt) {
+	/*
+	 * Ask the user for a numeric value, with the given prompt.
+	 * Rejects a negative value and returns 0 in that case.
+	 * Otherwise, returns the amount the user enters as a 'long' variable.
+	 */
+	long answer;
+	std::cout << prompt << std::endl;
+	if (std::cin >> answer && answer >= 0) {
+		/*
+		 * Lazy evaluation strikes back - if the first condition fails
+		 * the second condition is not checked. Also, the first condition
+		 * IS a valid way to check if your answer was allowed by the 'long' type
+		 */
+		return answer;
+	} else {
+		std::cout << "That input is not allowed" << std::endl;
+		return 0;
+		// probably not good practice of us to return 0 after only 1 failure, but
+		// it's not killing anybody
+	}
+}
+
 void performAccountActions(Bank &b, BankAccount &ba) {
 	/*
 	 * We already have this function up above, just
 	 * without the Bank &b parameter.
 	 * Neither this nor that are implemented yet.
 	 */
+	std::string response;
+	while (true) {
+		std::cout << "Would you like to (\"deposit\") or (\"withdraw\") money? (or \"logout\"): " << std::endl;
+		std::cin >> response;
+		if (response == "logout" || response == "exit") {
+			return; // as a void method, this will let us escape anytime
+		}
+		else if (response == "deposit") {
+			std::cout << "Would you like to deposit to (\"checking\") or (\"savings\")?" << std::endl;
+			std::cin >> response;
+			if (response == "checking" || response == "savings") {
+				long howmuch;
+				howmuch = getAmountToChange("How much would you like to deposit?");
+				if (howmuch > 0) {
+					std::cout << "Adding " << howmuch << " to your " <<
+							response << " balance" << std::endl;
+					if (response == "checking") {
+						ba.changeCheckingBal(howmuch);
+					}
+					if (response == "savings") {
+						ba.changeSavingsBal(howmuch);
+					}
+				}
+			}
+			else if (response == "exit" || response == "cancel") {
+				continue;
+			}
+			else {
+				std::cout << "That is not a valid location" << std::endl;
+			}
+		}
+		else if (response == "withdraw") {
+
+		}
+		else {
+			std::cout << "Invalid command, please try again" << std::endl;
+		}
+	}
 	return;
 }
 
@@ -174,6 +235,8 @@ FileBank& getGlobalFileBank() {
 	static FileBank fb(name, dataFile);
 	fb.initialize();
 	return fb;
+	// We will have to stop using this when we involve multiple banks...
+	// But today is not that day
 }
 
 void useBank(Bank &b) {
